@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canadian Salad - Online Card Game</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Lobby Screen -->
+  <div id="lobby" class="screen active">
+    <div class="container">
+      <h1>🃏 Canadian Salad</h1>
+      <p class="subtitle">The ultimate trick-taking card game for 3-4 players</p>
+
+      <div class="lobby-options">
+        <div class="option-card">
+          <h2>Create New Game</h2>
+          <input type="text" id="hostName" placeholder="Your name" maxlength="20">
+          <button id="createRoom" class="btn btn-primary">Create Room</button>
+        </div>
+
+        <div class="divider">OR</div>
+
+        <div class="option-card">
+          <h2>Join Existing Game</h2>
+          <input type="text" id="joinName" placeholder="Your name" maxlength="20">
+          <input type="text" id="roomCode" placeholder="Room code (e.g., WINE)" maxlength="4" style="text-transform: uppercase">
+          <button id="joinRoom" class="btn btn-secondary">Join Room</button>
+        </div>
+      </div>
+
+      <div id="error" class="error hidden"></div>
+    </div>
+  </div>
+
+  <!-- Waiting Room -->
+  <div id="waiting" class="screen">
+    <div class="container">
+      <h1>Waiting Room</h1>
+      <div class="room-code-display">
+        <span>Room Code:</span>
+        <strong id="displayRoomCode"></strong>
+      </div>
+
+      <div id="playerList" class="player-list"></div>
+
+      <p class="info">Waiting for 3-4 players...</p>
+      <button id="startGame" class="btn btn-primary hidden">Start Game</button>
+    </div>
+  </div>
+
+  <!-- Game Screen -->
+  <div id="game" class="screen">
+    <!-- Header -->
+    <div class="game-header">
+      <div class="round-info">
+        <h2 id="roundName">Round 1: No Reds</h2>
+        <p id="roundDesc">10 points per red card taken</p>
+      </div>
+      <div class="trick-info">
+        <span id="trickCounter">Trick 1/17</span>
+      </div>
+    </div>
+
+    <!-- Scoreboard -->
+    <div class="scoreboard">
+      <div id="scoreboardPlayers"></div>
+    </div>
+
+    <!-- Table (current trick) -->
+    <div class="table">
+      <div id="currentTrick" class="trick-area"></div>
+      <div id="turnIndicator" class="turn-indicator">Waiting for player...</div>
+    </div>
+
+    <!-- Player's hand -->
+    <div class="hand-container">
+      <h3>Your Hand</h3>
+      <div id="playerHand" class="player-hand"></div>
+    </div>
+
+    <!-- Round end overlay -->
+    <div id="roundEnd" class="overlay hidden">
+      <div class="overlay-content">
+        <h2>Round Complete!</h2>
+        <div id="roundScores"></div>
+        <button id="continueBtn" class="btn btn-primary">Continue to Next Round</button>
+      </div>
+    </div>
+
+    <!-- Game over overlay -->
+    <div id="gameOver" class="overlay hidden">
+      <div class="overlay-content">
+        <h2>Game Over!</h2>
+        <div id="finalScores"></div>
+        <button id="newGameBtn" class="btn btn-primary">New Game</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="client.js"></script>
+</body>
+</html>
