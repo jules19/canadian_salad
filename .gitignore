@@ -1,0 +1,8 @@
+node_modules/
+dist/
+*.log
+.env
+*.sqlite
+game-state-*.json
+.DS_Store
+coverage/
