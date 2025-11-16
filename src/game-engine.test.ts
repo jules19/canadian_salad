@@ -148,20 +148,6 @@ describe('Game Engine', () => {
   });
 
   describe('calculateTrickScore', () => {
-    describe('No Reds', () => {
-      it('should count 10 points per red card', () => {
-        const cards = ['H2', 'D5', 'C3', 'S4'];
-        const score = calculateTrickScore(cards, 'No Reds', false);
-        expect(score).toBe(20); // 2 red cards
-      });
-
-      it('should return 0 for no red cards', () => {
-        const cards = ['C2', 'S5', 'C3'];
-        const score = calculateTrickScore(cards, 'No Reds', false);
-        expect(score).toBe(0);
-      });
-    });
-
     describe('No Tricks', () => {
       it('should give 10 points flat for taking a trick', () => {
         const cards = ['H2', 'H5', 'D3', 'C4'];
@@ -176,11 +162,25 @@ describe('Game Engine', () => {
       });
     });
 
+    describe('No Hearts', () => {
+      it('should count 10 points per Heart', () => {
+        const cards = ['H2', 'H5', 'D3', 'C4'];
+        const score = calculateTrickScore(cards, 'No Hearts', false);
+        expect(score).toBe(20); // 2 Hearts
+      });
+
+      it('should not count Diamonds or other suits', () => {
+        const cards = ['D2', 'D5', 'C3', 'S4'];
+        const score = calculateTrickScore(cards, 'No Hearts', false);
+        expect(score).toBe(0);
+      });
+    });
+
     describe('No Queens', () => {
-      it('should count 100 points per Queen', () => {
+      it('should count 25 points per Queen', () => {
         const cards = ['HQ', 'DQ', 'C3'];
         const score = calculateTrickScore(cards, 'No Queens', false);
-        expect(score).toBe(200);
+        expect(score).toBe(50); // 2 Queens * 25
       });
 
       it('should return 0 for no Queens', () => {
@@ -224,12 +224,12 @@ describe('Game Engine', () => {
         const score = calculateTrickScore(cards, 'The Salad', true);
 
         // Trick penalty: 10
-        // Red cards (HQ, D2, H5): 3 * 10 = 30
-        // Queens: 1 * 100 = 100
+        // Hearts (HQ, H5): 2 * 10 = 20
+        // Queens (HQ): 1 * 25 = 25
         // King of Spades: 100
         // Last trick: 100
-        // Total: 340
-        expect(score).toBe(340);
+        // Total: 255
+        expect(score).toBe(255);
       });
     });
   });

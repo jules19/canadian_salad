@@ -75,9 +75,9 @@ The server maintains a Room object as the single source of truth:
 - Play proceeds clockwise from the trick winner
 
 ### Round Scoring (Points are penalties - lowest wins)
-1. **No Reds:** 10 pts per red card taken
-2. **No Tricks:** 10 pts per Heart taken
-3. **No Queens:** 100 pts per Queen taken
+1. **No Tricks:** 10 pts per trick taken
+2. **No Hearts:** 10 pts per Heart taken
+3. **No Queens:** 25 pts per Queen taken
 4. **No King of Spades:** 100 pts for KS
 5. **Last Trick:** 100 pts for last trick
 6. **The Salad:** All above rules active simultaneously
