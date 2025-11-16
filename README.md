@@ -8,9 +8,9 @@ Canadian Salad is a trick-taking card game played over 6 rounds, each with diffe
 
 ### The 6 Rounds
 
-1. **No Reds** - 10 pts per red card taken
-2. **No Tricks** - 10 pts per Heart taken
-3. **No Queens** - 100 pts per Queen taken
+1. **No Tricks** - 10 pts per trick taken
+2. **No Hearts** - 10 pts per Heart taken
+3. **No Queens** - 25 pts per Queen taken
 4. **No King of Spades** - 100 pts for KS
 5. **Last Trick** - 100 pts for taking the last trick
 6. **The Salad** - All above rules combined!
