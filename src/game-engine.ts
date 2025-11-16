@@ -9,8 +9,8 @@ const RANK_VALUES: Record<Rank, number> = {
 };
 
 export const ROUND_CONFIGS: RoundInfo[] = [
-  { roundNumber: 1, ruleName: 'No Reds', description: '10 points per red card taken' },
-  { roundNumber: 2, ruleName: 'No Tricks', description: '10 points per Heart taken' },
+  { roundNumber: 1, ruleName: 'No Tricks', description: '10 points per trick taken' },
+  { roundNumber: 2, ruleName: 'No Reds', description: '10 points per red card taken' },
   { roundNumber: 3, ruleName: 'No Queens', description: '100 points per Queen taken' },
   { roundNumber: 4, ruleName: 'No King of Spades', description: '100 points for King of Spades' },
   { roundNumber: 5, ruleName: 'Last Trick', description: '100 points for taking the last trick' },
@@ -153,8 +153,8 @@ export function calculateTrickScore(cards: Card[], roundName: RoundName, isLastT
       break;
 
     case 'No Tricks':
-      // 10 points per Heart
-      score = cards.filter(card => parseCard(card).suit === 'H').length * 10;
+      // 10 points for taking the trick
+      score = 10;
       break;
 
     case 'No Queens':
@@ -174,17 +174,16 @@ export function calculateTrickScore(cards: Card[], roundName: RoundName, isLastT
 
     case 'The Salad':
       // All rules combined
+      const trickPenalty = 10; // Round 1: No Tricks
       const redCards = cards.filter(card => {
         const { suit } = parseCard(card);
         return suit === 'H' || suit === 'D';
-      }).length * 10;
-
-      const hearts = cards.filter(card => parseCard(card).suit === 'H').length * 10;
+      }).length * 10; // Round 2: No Reds
       const queens = cards.filter(card => parseCard(card).rank === 'Q').length * 100;
       const kingOfSpades = cards.some(card => card === 'SK') ? 100 : 0;
       const lastTrick = isLastTrick ? 100 : 0;
 
-      score = redCards + hearts + queens + kingOfSpades + lastTrick;
+      score = trickPenalty + redCards + queens + kingOfSpades + lastTrick;
       break;
   }
 

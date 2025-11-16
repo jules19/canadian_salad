@@ -163,16 +163,16 @@ describe('Game Engine', () => {
     });
 
     describe('No Tricks', () => {
-      it('should count 10 points per Heart', () => {
+      it('should give 10 points flat for taking a trick', () => {
         const cards = ['H2', 'H5', 'D3', 'C4'];
         const score = calculateTrickScore(cards, 'No Tricks', false);
-        expect(score).toBe(20); // 2 Hearts
+        expect(score).toBe(10); // Flat 10 points for the trick
       });
 
-      it('should not count Diamonds', () => {
-        const cards = ['D2', 'D5', 'C3'];
+      it('should give 10 points regardless of cards in trick', () => {
+        const cards = ['C2', 'S5', 'C3'];
         const score = calculateTrickScore(cards, 'No Tricks', false);
-        expect(score).toBe(0);
+        expect(score).toBe(10); // Still 10 points
       });
     });
 
@@ -223,13 +223,13 @@ describe('Game Engine', () => {
         const cards = ['HQ', 'D2', 'SK', 'H5'];
         const score = calculateTrickScore(cards, 'The Salad', true);
 
-        // Red cards: 4 * 10 = 40
-        // Hearts: 2 * 10 = 20
+        // Trick penalty: 10
+        // Red cards (HQ, D2, H5): 3 * 10 = 30
         // Queens: 1 * 100 = 100
         // King of Spades: 100
         // Last trick: 100
-        // Total: 360
-        expect(score).toBe(360);
+        // Total: 340
+        expect(score).toBe(340);
       });
     });
   });

@@ -6,8 +6,8 @@ export type Card = string; // Format: SuitRank (e.g., "H2", "SK")
 export type RoomStatus = 'WAITING' | 'PLAYING' | 'ROUND_END' | 'FINISHED';
 
 export type RoundName =
-  | 'No Reds'       // Round 1: 10 pts per red card taken
-  | 'No Tricks'     // Round 2: 10 pts per Heart taken
+  | 'No Tricks'     // Round 1: 10 pts per trick taken
+  | 'No Reds'       // Round 2: 10 pts per red card taken
   | 'No Queens'     // Round 3: 100 pts per Queen taken
   | 'No King of Spades'  // Round 4: 100 pts for King of Spades
   | 'Last Trick'    // Round 5: 100 pts for last trick
