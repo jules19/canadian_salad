@@ -93,8 +93,14 @@ npm install
 # Start development server
 npm run dev
 
-# Run tests
+# Run all tests (47 total: 29 unit + 18 integration)
 npm test
+
+# Run only unit tests (game-engine.test.ts)
+npm test -- game-engine.test
+
+# Run only integration tests (game-state.test.ts)
+npm test -- game-state.test
 
 # Run specific test file
 npm test -- <test-file-name>
@@ -108,6 +114,36 @@ npm run build
 # Start production server
 npm start
 ```
+
+## Testing Strategy
+
+The project has comprehensive test coverage:
+
+**Unit Tests (game-engine.test.ts - 29 tests):**
+- Core game logic: deck creation, card dealing, parsing
+- Scoring calculations for all 6 rounds
+- Trick winner determination
+- Suit-following validation
+- Card sorting and valid card selection
+
+**Integration Tests (game-state.test.ts - 18 tests):**
+- Full 6-round game simulations (3-player and 4-player)
+- Round-specific scoring verification:
+  - Round 1 (No Tricks): 10 pts per trick
+  - Round 2 (No Hearts): 10 pts per heart
+  - Round 3 (No Queens): 25 pts per queen
+  - Round 4 (King of Spades): 100 pts for SK
+  - Round 5 (Last Trick): 100 pts for last trick
+  - Round 6 (The Salad): All rules combined
+- Score accumulation across rounds
+- Game state validation (turn order, card ownership, suit-following)
+- Round transitions and state management
+
+**When modifying game rules or scoring:**
+1. Update the relevant function in `game-engine.ts`
+2. Update corresponding unit tests in `game-engine.test.ts`
+3. Run integration tests to ensure full game flows still work
+4. Update CLAUDE.md and README.md if rules changed
 
 ## Performance Constraints
 

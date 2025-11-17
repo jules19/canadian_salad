@@ -42,14 +42,17 @@ npm start
 ### Testing
 
 ```bash
-# Run all tests
+# Run all tests (47 total: 29 unit + 18 integration)
 npm test
 
 # Run tests in watch mode
 npm test:watch
 
-# Run specific test file
+# Run only unit tests
 npm test -- game-engine.test
+
+# Run only integration tests
+npm test -- game-state.test
 ```
 
 ### Linting
@@ -81,10 +84,11 @@ src/
 ├── server.ts              # Express + Socket.io server
 ├── types.ts               # TypeScript type definitions
 ├── game-engine.ts         # Core game logic (deck, tricks, scoring)
+├── game-engine.test.ts    # Unit tests (29 tests)
 ├── game-state.ts          # State management (play cards, resolve tricks)
+├── game-state.test.ts     # Integration tests (18 tests - full game flows)
 ├── room-manager.ts        # Room lifecycle (create, join, cleanup)
-├── state-persistence.ts   # Periodic JSON snapshots
-└── game-engine.test.ts    # Unit tests
+└── state-persistence.ts   # Periodic JSON snapshots
 
 public/
 ├── index.html             # Frontend UI
@@ -162,6 +166,7 @@ docker run -p 3000:3000 canadian-salad
 - [x] State persistence (crash recovery)
 - [x] Responsive UI (mobile-friendly)
 - [x] Round transitions and final scoring
+- [x] Comprehensive test suite (47 tests covering unit + integration)
 
 ### 🚧 Future Enhancements
 

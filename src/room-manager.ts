@@ -10,10 +10,19 @@ const DISCONNECT_GRACE_PERIOD_MS = 5 * 60 * 1000; // 5 minutes
 
 export class RoomManager {
   private rooms = new Map<string, Room>();
+  private cleanupInterval: NodeJS.Timeout;
 
   constructor() {
     // Run cleanup every 10 minutes
-    setInterval(() => this.cleanupExpiredRooms(), 10 * 60 * 1000);
+    this.cleanupInterval = setInterval(() => this.cleanupExpiredRooms(), 10 * 60 * 1000);
+  }
+
+  /**
+   * Cleanup resources (for testing)
+   */
+  destroy(): void {
+    clearInterval(this.cleanupInterval);
+    this.rooms.clear();
   }
 
   /**
